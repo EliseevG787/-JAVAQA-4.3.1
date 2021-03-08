@@ -21,42 +21,48 @@ public class IssueManager {
     }
 
     public List<Issue> findOpened() {
-        List<Issue> issues1 = new ArrayList<>();
+        List<Issue> items = new ArrayList<>();
         List<Issue> issues = repository.getAll();
         for (Issue issue : issues) {
             if (issue.isOpen()) {
-                issues1.add(issue);
+                items.add(issue);
             }
         }
-        return issues1;
+        return items;
     }
 
     public List<Issue> findClosed() {
-        List<Issue> issues1 = new ArrayList<>();
+        List<Issue> items = new ArrayList<>();
         List<Issue> issues = repository.getAll();
         for (Issue issue : issues) {
             if (!issue.isOpen()) {
-                issues1.add(issue);
+                items.add(issue);
             }
         }
-        return issues1;
+        return items;
     }
 
     public Collection<Issue> filterByAuthorName(String authorName) {
         Collection<Issue> issues = new ArrayList<>();
-        repository.getAll().stream().filter(issue -> issue.getAuthorName() == authorName).forEach(issue -> issues.add(issue));
+        repository.getAll()
+                .stream().filter(issue -> issue.getAuthorName() == authorName)
+                .forEach(issue -> issues.add(issue));
         return issues;
     }
 
     public Collection<Issue> filterByLabel(Set<String> label) {
         Collection<Issue> issues = new ArrayList<>();
-        repository.getAll().stream().filter(issue -> issue.getLabel().containsAll(label)).forEach(issue -> issues.add(issue));
+        repository.getAll()
+                .stream().filter(issue -> issue.getLabel().containsAll(label))
+                .forEach(issue -> issues.add(issue));
         return issues;
     }
 
     public Collection<Issue> filterByAssignee(Set<String> assignee) {
         Collection<Issue> issues = new ArrayList<>();
-        repository.getAll().stream().filter(issue -> issue.getAssignee().containsAll(assignee)).forEach(issue -> issues.add(issue));
+        repository.getAll()
+                .stream().filter(issue -> issue.getAssignee().containsAll(assignee))
+                .forEach(issue -> issues.add(issue));
         return issues;
     }
 
