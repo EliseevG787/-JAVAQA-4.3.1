@@ -2,7 +2,6 @@ package ru.netology.manager;
 
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import ru.netology.comparator.IssueByTimeAscComparator;
 import ru.netology.domain.Issue;
 import ru.netology.repository.IssueRepository;
 
@@ -13,7 +12,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class IssueManagerTest {
     private IssueRepository repository = new IssueRepository();
     private IssueManager manager = new IssueManager(repository);
-    private Comparator<Issue> comparator = new IssueByTimeAscComparator();
     private Issue issue1 = new Issue(1, 1, "splatch", Set.of("Jupiter", "extensions", "documentation"), Set.of("dsaff", "kcooney"), false);
     private Issue issue2 = new Issue(2, 3, "splatch", Set.of("Jupiter", "extensions", "documentation"), Set.of("dsaff", "kcooney"), false);
     private Issue issue3 = new Issue(3, 6, "splatch", Set.of("Kotlin", "Gradle", "Pioneer"), Set.of("dsaff", "kcooney"), false);
@@ -46,7 +44,7 @@ class IssueManagerTest {
         void shouldFindSortedNewest() {
             Collection<Issue> expected = new ArrayList<>();
 
-            List<Issue> actual = manager.findSortedNewest(comparator);
+            List<Issue> actual = manager.findSortedNewest();
             assertEquals(expected, actual);
         }
 
@@ -54,7 +52,7 @@ class IssueManagerTest {
         void shouldFindSortedOldest() {
             Collection<Issue> expected = new ArrayList<>();
 
-            List<Issue> actual = manager.findSortedOldest(comparator);
+            List<Issue> actual = manager.findSortedOldest();
             assertEquals(expected, actual);
         }
 
@@ -168,7 +166,7 @@ class IssueManagerTest {
             Collection<Issue> expected = new ArrayList<>();
             expected.add(issue3);
 
-            List<Issue> actual = manager.findSortedNewest(comparator);
+            List<Issue> actual = manager.findSortedNewest();
             assertEquals(expected, actual);
         }
 
@@ -179,7 +177,7 @@ class IssueManagerTest {
             Collection<Issue> expected = new ArrayList<>();
             expected.add(issue4);
 
-            List<Issue> actual = manager.findSortedOldest(comparator);
+            List<Issue> actual = manager.findSortedOldest();
             assertEquals(expected, actual);
         }
 
@@ -313,7 +311,7 @@ class IssueManagerTest {
             Collection<Issue> expected = new ArrayList<>();
             expected.addAll(List.of(issue1, issue2, issue3, issue4, issue5));
 
-            List<Issue> actual = manager.findSortedNewest(comparator);
+            List<Issue> actual = manager.findSortedNewest();
             assertEquals(expected, actual);
         }
 
@@ -324,7 +322,7 @@ class IssueManagerTest {
             Collection<Issue> expected = new ArrayList<>();
             expected.addAll(List.of(issue5, issue4, issue3, issue2, issue1));
 
-            List<Issue> actual = manager.findSortedOldest(comparator);
+            List<Issue> actual = manager.findSortedOldest();
             assertEquals(expected, actual);
         }
 
