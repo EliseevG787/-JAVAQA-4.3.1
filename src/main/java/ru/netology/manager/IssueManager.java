@@ -66,14 +66,16 @@ public class IssueManager {
         return issues;
     }
 
-    public List<Issue> findSortedNewest(Comparator<Issue> comparator) {
+    public List<Issue> findSortedNewest() {
         List<Issue> issues = repository.getAll();
-        issues.sort(comparator);
+        issues.sort(Comparator.naturalOrder());
         return issues;
     }
 
-    public List<Issue> findSortedOldest(Comparator<Issue> comparator) {
-        return findSortedNewest(comparator.reversed());
+    public List<Issue> findSortedOldest() {
+        List<Issue> issues = repository.getAll();
+        issues.sort(Comparator.reverseOrder());
+        return issues;
     }
 
     public void update(Issue issue, boolean open) {
