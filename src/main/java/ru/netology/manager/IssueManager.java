@@ -45,7 +45,7 @@ public class IssueManager {
     public Collection<Issue> filterByAuthorName(String authorName) {
         Collection<Issue> issues = new ArrayList<>();
         repository.getAll()
-                .stream().filter(issue -> issue.getAuthorName() == authorName)
+                .stream().filter(issue -> issue.getAuthorName().equals(authorName))
                 .forEach(issue -> issues.add(issue));
         return issues;
     }
